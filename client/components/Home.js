@@ -8,7 +8,7 @@ import { User } from "./User";
  */
 export const Home = (props) => {
   const { username } = props;
-  console.log("props", props);
+  //console.log("props", props);
   // console.log(`this.props`, this.props);
 
   return (

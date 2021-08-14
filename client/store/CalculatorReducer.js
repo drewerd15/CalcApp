@@ -17,29 +17,45 @@ const getCalculators = (calculators) => ({
 });
 
 //return an array of all calculators for a user
+// export const getCalculatorsList = () => {
+//   const token = window.localStorage.getItem("token");
+//   return (dispatch) => {
+//     axios
+//       .get("/api/calculators", {
+//         headers: {
+//           authorization: token,
+//         },
+//       })
+//       .then((response) => {
+//         console.log(
+//           `getCalculators(response.data)`,
+//           getCalculators(response.data)
+//         );
+//         dispatch(getCalculators(response.data));
+//       })
+//       .catch((error) => {
+//         console.log(error);
+//       });
+//   };
+// };
 export const getCalculatorsList = () => {
   const token = window.localStorage.getItem("token");
-  return (dispatch) => {
-    axios
-      .get("/api/calculators", {
+  return async (dispatch) => {
+    try {
+      const { data: calculators } = await axios.get("/api/calculators", {
         headers: {
           authorization: token,
         },
-      })
-      .then((response) => {
-        console.log(
-          `getCalculators(response.data)`,
-          getCalculators(response.data)
-        );
-        dispatch(getCalculators(response.data));
-      })
-      .catch((error) => {
-        console.log(error);
       });
+      dispatch(getCalculators(calculators));
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
-export default function CalculatorReducer(state = {}, action) {
+export default function (state = {}, action) {
+  console.log(`action red hit`, action);
   switch (action.type) {
     case SET_CALCULATORS: {
       console.log(`some random string`, action);
@@ -48,7 +64,7 @@ export default function CalculatorReducer(state = {}, action) {
     }
     case GET_CALCULATORS: {
       console.log(`some random string`, action);
-      return action.calculators;
+      return { ...state, calculators: [action.calculators] };
     }
     default:
       return state;

@@ -18,26 +18,36 @@ import { User } from "./User";
 class CalculatorList extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      calculators: [],
-    };
   }
   componentDidMount() {
-    this.setthis.props.getCalculatorsList();
+    this.props.getCalcFunc();
   }
   render() {
-    const { calculators } = this.state;
-    console.log(`calculator`, calculators);
+    //const calculators = this.state.calculators;
+
+    console.log(`calculator`, this.state);
     console.log(`this.props`, this.props);
     return (
       <div className="container">
         <div>
           <h1>Calculators</h1>
           <ul>
-            {calculators.map((calculator) => {
+            {this.props.calculators && this.props.calculators.length > 0 ? (
+              <div>
+                {this.props.calculators.map((calculator) => (
+                  <div key={calculator.id}>
+                    <h3>{calculator.name}</h3>
+                    <h3>{calculator.description}</h3>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div>womp</div>
+            )}
+            {/* {calculators.map((calculator) => {
               return;
               <li key={calculator.id}> </li>;
-            })}
+            })} */}
           </ul>
         </div>
       </div>
@@ -54,11 +64,11 @@ class CalculatorList extends Component {
 const mapState = (state) => {
   return {
     username: state.auth.username,
-    calculators: state,
+    calculators: state.CalculatorReducer.calculators,
   };
 };
 const mapDispatch = (dispatch) => ({
-  getCalculatorsList: () => dispatch(getCalculatorsList()),
+  getCalcFunc: () => dispatch(getCalculatorsList()),
 });
 
 export default connect(mapState, mapDispatch)(CalculatorList);
