@@ -9,7 +9,6 @@ export const User = (props) => {
   ///const { CalculatorList } = props;
   return (
     <div>
-      {console.log("User", username)}
       <h3>Welcome, {username}</h3>
       <h3>
         <Link to={"/list"} className="btn btn-primary">

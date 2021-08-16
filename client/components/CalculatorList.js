@@ -36,7 +36,9 @@ class CalculatorList extends Component {
               <div>
                 {this.props.calculators.map((calculator) => (
                   <div key={calculator.id}>
-                    <h3>{calculator.name}</h3>
+                    <Link to={`/calculators/${calculator.id}`}>
+                      <h3>{calculator.name}</h3>
+                    </Link>
                     <h3>{calculator.description}</h3>
                   </div>
                 ))}

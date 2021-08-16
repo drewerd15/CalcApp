@@ -10,7 +10,11 @@ const Calculators = db.define("Calculators", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  payload: {
+  schema: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  uischema: {
     type: Sequelize.STRING,
     allowNull: false,
   },
