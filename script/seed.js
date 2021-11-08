@@ -23,17 +23,13 @@ async function seed() {
     Calculators.create({
       name: "speed",
       description: "This calculates speed!",
-      schema:
-        '{"type":"object","title":"sometitle","description":"descrip","properties":{"inname":{"title":"dispname","type":"string","description":"sdfsdf"}},"dependencies":{},"required":[]}',
-      uischema: '{"ui:order":["inname"]}',
+      design: "Some Test",
       userId: users[0].id,
     }),
     Calculators.create({
       name: "length",
       description: "This calculates lenght!",
-      schema:
-        '{"type":"object","title":"sometitle","description":"descrip","properties":{"inname":{"title":"dispname","type":"string","description":"sdfsdf"}},"dependencies":{},"required":[]}',
-      uischema: '{"ui:order":["inname"]}',
+      design: "some Test",
       userId: users[0].id,
     }),
   ]);

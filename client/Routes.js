@@ -7,6 +7,7 @@ import User from "./components/User";
 import { me } from "./store";
 import List from "./components/CalculatorList";
 import Edit from "./components/EditCalculator";
+import SingleCalculator from "./components/singleCalculator";
 /**
  * COMPONENT
  */
@@ -26,7 +27,7 @@ class Routes extends Component {
             <Route path="/home" component={Home} />
             <Route path="/user" component={User} />
             <Route path="/edit" component={Edit} />
-            <Route path="/calculators/:id" component={Edit} />
+            <Route path="/calculators/:id" component={SingleCalculator} />
             {/* <Redirect to="/home" /> */}
           </Switch>
         ) : (

@@ -2,15 +2,14 @@ import axios from "axios";
 import history from "../history";
 
 const initialState = {
-  schema: {},
-  uischema: {},
+  calculatorDesign: {},
   calculators: {},
 };
 
 const SET_CALCULATORS = "SET_CALCULATORS";
 const GET_CALCULATORS = "GET_CALCULATORS";
-const SET_CALCULATOR_SCHEMA = "SET_CALCULATOR_SCHEMA";
-const GET_CALCULATOR_SCHEMA = "GET_CALCULATOR_SCHEMA";
+const SET_CALCULATOR_DESIGN = "SET_CALCULATOR_DESIGN";
+const GET_CALCULATOR_DESIGN = "GET_CALCULATOR_DESIGN";
 
 const setCalculators = (calculators) => ({
   type: SET_CALCULATORS,
@@ -21,14 +20,14 @@ const getCalculators = (calculators) => ({
   type: GET_CALCULATORS,
   calculators,
 });
-const setCalculatorSchema = (schema) => ({
-  type: SET_CALCULATOR_SCHEMA,
-  schema,
+const setCalculatorDesign = (design) => ({
+  type: SET_CALCULATOR_DESIGN,
+  design,
 });
 
-const getCalculatorSchema = (schema) => ({
-  type: GET_CALCULATOR_SCHEMA,
-  schema,
+const getCalculatorDesign = (design) => ({
+  type: GET_CALCULATOR_DESIGN,
+  design,
 });
 
 //return an array of all calculators for a user
@@ -69,32 +68,33 @@ export const getCalculatorsList = () => {
   };
 };
 //fix method here
-export const setCalculatorSchemaThunk = () => {
+export const setCalculatorDesignThunk = (id, calculator) => {
   const token = window.localStorage.getItem("token");
   return async (dispatch) => {
     try {
-      const { data: schema } = await axios.post("/api/calculators/:id", {
+      const { data: design } = await axios.post(`/api/calculators/${id}`, {
         headers: {
           authorization: token,
         },
+        calculator,
       });
-      dispatch(setCalculatorSchema(schema));
+      dispatch(setCalculatorDesign(design));
     } catch (e) {
       console.log(e);
     }
   };
 };
 //fix method here
-export const getCalculatorSchemaThunk = (id) => {
+export const getCalculatorDesignThunk = (id) => {
   const token = window.localStorage.getItem("token");
   return async (dispatch) => {
     try {
-      const { data: schema } = await axios.get(`/api/calculators/${id}`, {
+      const { data: design } = await axios.get(`/api/calculators/${id}`, {
         headers: {
           authorization: token,
         },
       });
-      dispatch(getCalculatorSchema(schema));
+      dispatch(getCalculatorDesign(design));
     } catch (e) {
       console.log(e);
     }
@@ -109,15 +109,14 @@ export default function (state = initialState, action) {
     case GET_CALCULATORS: {
       return { ...state, calculators: [action.calculators] };
     }
-    case SET_CALCULATOR_SCHEMA: {
-      return { ...state, calculator: action.schema };
+    case SET_CALCULATOR_DESIGN: {
+      return { ...state, calculator: action.design };
     }
-    case GET_CALCULATOR_SCHEMA: {
+    case GET_CALCULATOR_DESIGN: {
       console.log(`action`, action);
       return {
         ...state,
-        schema: action.schema[0].schema,
-        uischema: action.schema[0].uischema,
+        design: action.design[0].design,
       };
     }
     default:

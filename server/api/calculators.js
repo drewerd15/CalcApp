@@ -16,15 +16,6 @@ router.get("/", requireToken, async (req, res, next) => {
   }
 });
 
-// /api/calculators/id  update a calculator schema
-// router.get("/:id", async (req, res, next) => {
-//   try {
-//     const schema = await Calculators.findOne(req.params.id);
-//     res.json(calculator);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
 router.get("/:id", requireToken, async (req, res, next) => {
   try {
     const calculator = await req.user.getCalculators({
@@ -36,14 +27,18 @@ router.get("/:id", requireToken, async (req, res, next) => {
   }
 });
 
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const createCalculator = await calculators.create(req.body);
-//     res.json(calculator);
-//   } catch (err) {
-//     next(err);
-//   }
-// });
+router.post("/:id", requireToken, async (req, res, next) => {
+  try {
+    const calculator = await req.user.getCalculators({
+      where: { id: req.params.id },
+    });
+    calculator.design = req.params.design;
+    await calculator.save;
+    res.json(calculator);
+  } catch (err) {
+    next(err);
+  }
+});
 
 router.delete("/:id", async (req, res, next) => {
   try {
