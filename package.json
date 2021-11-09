@@ -29,6 +29,7 @@
     "history": "^4.9.0",
     "i": "^0.3.6",
     "jsonwebtoken": "^8.5.1",
+    "mathjs": "^10.0.0",
     "morgan": "^1.9.1",
     "pg": "^8.5.1",
     "react-form-builder2": "^0.9.4",
