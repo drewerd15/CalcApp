@@ -7,7 +7,7 @@ module.exports = router;
 // /api/calculators/
 router.get("/", requireToken, async (req, res, next) => {
   try {
-    // console.log("req.user");
+    console.log("req.user");
     const calculators = await Calculators.findByPk(req.user.id);
     //console.log(`calculators`, calculators);
     res.json(calculators);
@@ -16,11 +16,9 @@ router.get("/", requireToken, async (req, res, next) => {
   }
 });
 
-router.get("/:id", requireToken, async (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
-    const calculator = await req.user.getCalculators({
-      where: { id: req.params.id },
-    });
+    const calculator = await Calculators.findByPk(req.params.id);
     res.json(calculator);
   } catch (err) {
     next(err);

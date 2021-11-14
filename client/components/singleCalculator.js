@@ -14,8 +14,8 @@ class SingleCalculator extends Component {
       //variables:[]
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-
   componentDidMount() {
     this.props.getCalculator(this.props.match.params.id);
     console.log(`this.props`, this.state);
@@ -28,16 +28,17 @@ class SingleCalculator extends Component {
     }
   }
   handleChange(evt) {
+    evt.preventDefault();
     this.setState({
       [evt.target.name]: evt.target.value,
     });
   }
   handleSubmit(evt) {
     evt.preventDefault();
-    this.props.editRobot({ ...this.state, id: this.props.robot.id });
+    // this.props.editRobot({ ...this.state, id: this.props.robot.id });
   }
   componentDidUpdate(prevProps, prevState) {
-    console.log(`prevState`, prevState);
+    // console.log(`prevState`, prevState);
     // if (prevState !== this.state) {
     //   this.doMath();
     // }
@@ -67,8 +68,9 @@ class SingleCalculator extends Component {
       <div>
         <div>Hello Calculator</div>
         <div>
-          <form action="">
+          <form action="" onSubmit={this.handleSubmit}>
             <div>
+              <label>X</label>
               <input
                 type="text"
                 name="x"
@@ -78,6 +80,7 @@ class SingleCalculator extends Component {
               />
             </div>
             <div>
+              <label>Y</label>
               <input
                 type="text"
                 name="y"
@@ -86,6 +89,7 @@ class SingleCalculator extends Component {
                 value={this.state.y}
               />
             </div>
+            <label>Formula</label>
             <input
               type="text"
               name="design"
@@ -97,6 +101,7 @@ class SingleCalculator extends Component {
               <input type="submit" value="GO!" />
             </div>
           </form>
+          <div>Your answer is: </div>
           <div>{this.doMath()}</div>
         </div>
       </div>

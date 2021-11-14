@@ -36,6 +36,7 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route path="/home" component={Home} />
+            <Route path="/calculators/:id" component={SingleCalculator} />
             {/* <Redirect to="/home" /> */}
           </Switch>
         )}
